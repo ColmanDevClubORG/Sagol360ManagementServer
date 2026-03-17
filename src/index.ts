@@ -1,12 +1,8 @@
-import express from 'express';
+import app from './app';
 
-const app = express();
 const PORT = 3000;
-
-app.get('/', (req, res) => {
-  res.send('Hello Express + TypeScript');
-});
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Swagger Documentation at http://localhost:${PORT}/api-docs`);
 });
