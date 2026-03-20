@@ -1,6 +1,3 @@
 export const getExampleMessage = (): string => {
-  return 'Hello Express + TypeScript (MVC Architecture)';
+  return 'Hello Express + TypeScript (MVC)';
 };
-
-const x = 5
-console.log("hello")
