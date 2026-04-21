@@ -1,4 +1,4 @@
-import tips from '../db/tips.json'
+import tips from '../db/tips.json';
 
 export const getTip = (totalTreatments: number, currentTreatment: number): string => {
   if (totalTreatments === 60 && currentTreatment <= 60) {

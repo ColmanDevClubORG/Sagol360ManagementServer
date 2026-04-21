@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getTip as serviceGetTip } from '../services/tips.service';
 
-export const getTip = (req: Request, res: Response, next: NextFunction) => {
+export const getTip = (req: Request, res: Response, _next: NextFunction) => {
   try {
     const totalTreatments = Number(req.query.totalProtocolTreatments);
     const currentTreatment = Number(req.query.currentTreatmentNumber);
