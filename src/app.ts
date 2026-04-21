@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import exampleRoutes from './routes/example.routes';
+import tipsRoutes from './routes/tips.routes';
 import { logger } from './middleware/logger.middleware';
 import { errorHandler } from './middleware/error.middleware';
 import swaggerUi from 'swagger-ui-express';
@@ -14,6 +15,7 @@ app.use(logger);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', exampleRoutes);
+app.use('/api/tips', tipsRoutes);
 
 app.use(errorHandler);
 
