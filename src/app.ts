@@ -15,7 +15,7 @@ app.use(logger);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', exampleRoutes);
-app.use('/api', patientRoutes);
+app.use('/api/patients', patientRoutes);
 
 app.use(errorHandler);
 

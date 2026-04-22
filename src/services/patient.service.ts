@@ -30,50 +30,50 @@ export interface PatientResponse {
   firstName: string;
   totalProtocolTreatments: number;
   currentTreatmentNumber: number;
-  appointments: Appointment[]; 
+  appointments: Appointment[];
 }
-
 
 const patientsDbPath = path.resolve(process.cwd(), 'src', 'db', 'patients.json');
 
-const readPatientsDb = async (): Promise<PatientsDb> => {
-  try {
-    const rawPatients = await fs.readFile(patientsDbPath, 'utf-8');
-    return JSON.parse(rawPatients);
-  } catch (error) {
-    console.error('Database Read Error:', error);
-    return { patients: [] };
-  }
-};
+const getAllPatients = async (): Promise<Patient[]> => {
+  const rawPatients = await fs.readFile(patientsDbPath, 'utf-8');
+  const { patients } = JSON.parse(rawPatients) as PatientsDb;
 
+  return patients;
+};
 
 export const getPatientBySerializeNumber = async (
   serializeNumber: number
 ): Promise<PatientResponse | null> => {
-  try {
-    const { patients } = await readPatientsDb();
+  const patients = await getAllPatients();
+  const patient = patients.find((currentPatient) => currentPatient.serializeNumber === serializeNumber);
 
-    const patient = patients.find((p) => p.serializeNumber === serializeNumber);
-
-    if (
-      !patient ||
-      patient.serializeNumber === undefined ||
-      patient.firstName === undefined ||
-      patient.totalProtocolTreatments === undefined ||
-      patient.currentTreatmentNumber === undefined
-    ) {
-      return null;
-    }
-
-    return {
-      serializeNumber: patient.serializeNumber,
-      firstName: patient.firstName,
-      totalProtocolTreatments: patient.totalProtocolTreatments,
-      currentTreatmentNumber: patient.currentTreatmentNumber,
-      appointments: patient.appointments || [], 
-    };
-  } catch (error) {
-    console.error(`Failed to get patient ${serializeNumber}:`, error);
+  if (!patient) {
     return null;
   }
+
+  const {
+    serializeNumber: patientSerializeNumber,
+    firstName,
+    totalProtocolTreatments,
+    currentTreatmentNumber,
+    appointments = [],
+  } = patient;
+
+  if (
+    patientSerializeNumber === undefined ||
+    firstName === undefined ||
+    totalProtocolTreatments === undefined ||
+    currentTreatmentNumber === undefined
+  ) {
+    return null;
+  }
+
+  return {
+    serializeNumber: patientSerializeNumber,
+    firstName,
+    totalProtocolTreatments,
+    currentTreatmentNumber,
+    appointments,
+  };
 };

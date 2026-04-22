@@ -63,6 +63,6 @@ const router = Router();
  *                   type: string
  *                   example: Patient not found
  */
-router.get('/patients/:serializeNumber', getPatientBySerializeNumber);
+router.get('/:serializeNumber', getPatientBySerializeNumber);
 
 export default router;
