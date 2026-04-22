@@ -1,0 +1,42 @@
+{
+  "patients": [
+    {
+      "serializeNumber": 1622017,
+      "firstName": "שלמה",
+      "secondName": "",
+      "lastName": "כהן",
+      "gender": "male",
+      "totalProtocolTreatments": 60,
+      "currentTreatmentNumber": 30,
+      "preferredLanguage": "he",
+      "appointments": [
+        {
+          "title": "progress.treatment",
+          "startAt": "2026-04-20T09:00:00.000Z",
+          "durationMinutes": 45,
+          "location": "appointment.room203",
+          "type": "cognitive_assessment"
+        }
+      ]
+    },
+    {
+      "serializeNumber": 1622018,
+      "firstName": "דנה",
+      "secondName": "",
+      "lastName": "לוי",
+      "gender": "female",
+      "totalProtocolTreatments": 24,
+      "currentTreatmentNumber": 12,
+      "preferredLanguage": "he",
+      "appointments": [
+        {
+          "title": "progress.treatment",
+          "startAt": "2026-04-25T10:30:00.000Z",
+          "durationMinutes": 30,
+          "location": "appointment.room102",
+          "type": "hyperbaric_chamber"
+        }
+      ]
+    }
+  ]
+}
