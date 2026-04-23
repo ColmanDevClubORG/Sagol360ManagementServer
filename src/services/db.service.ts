@@ -1,43 +1,31 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose, { connect, connection, ConnectionStates, Model } from 'mongoose';
+import { DEFAULT_MONGO_URI } from '../constants/db.constants';
 
-const MONGO_URI = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017/sagol360managementserver';
+const MONGO_URI = process.env.MONGO_URI ?? DEFAULT_MONGO_URI;
 
-let connectionPromise: Promise<typeof mongoose> | null = null;
-
-export const connectDb = async (): Promise<void> => {
-  if (mongoose.connection.readyState === 1) return;
-
-  if (!connectionPromise) {
-    connectionPromise = mongoose.connect(MONGO_URI);
+export const connectToDb = async (): Promise<void> => {
+  if (connection.readyState === ConnectionStates.connected) {
+    return;
   }
 
-  try {
-    await connectionPromise;
-  } catch (error) {
-    connectionPromise = null;
-    throw error;
-  }
+  await connect(MONGO_URI);
 };
 
 export const dbService = {
-  get: async (model: Model<any>, filter: Record<string, unknown> = {}) => {
-    return model.find(filter).lean();
+  get: async <T>(model: Model<T>, filter: Record<string, unknown> = {}) => {
+    return model.find(filter).lean<T[]>();
   },
 
-  insert: async (model: Model<any>, data: Record<string, unknown>) => {
+  insert: async <T>(model: Model<T>, data: Partial<T>) => {
     return model.create(data);
   },
 
-  update: async (
-    model: Model<any>,
-    filter: Record<string, unknown>,
-    data: Record<string, unknown>
-  ) => {
+  update: async <T>(model: Model<T>, filter: Record<string, unknown>, data: Partial<T>) => {
     return model
       .findOneAndUpdate(filter, data, {
-        new: true, 
-        runValidators: true, 
+        new: true,
+        runValidators: true,
       })
-      .lean();
+      .lean<T>();
   },
 };

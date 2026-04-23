@@ -1,11 +1,11 @@
 import app from './app';
-import { connectDb } from './services/db.service';
+import { connectToDb } from './services/db.service';
 
 const PORT = Number(process.env.PORT) || 3000;
 
 const startServer = async (): Promise<void> => {
   try {
-    await connectDb();
+    await connectToDb();
     console.log('MongoDB connected');
 
     app.listen(PORT, () => {
@@ -18,4 +18,4 @@ const startServer = async (): Promise<void> => {
   }
 };
 
-void startServer();
+startServer();
