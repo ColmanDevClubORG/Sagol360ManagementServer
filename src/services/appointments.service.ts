@@ -18,5 +18,5 @@ export const getAppointments = (patientId: string): Appointment[] => {
 export const getNextAppointment = (patientId: string, date: string): Appointment | undefined => {
   return appointments
     .filter((a) => a.patientId === patientId && a.date >= date)
-    .sort((a, b) => (a.date > b.date ? 1 : -1))[0];
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0];
 };
