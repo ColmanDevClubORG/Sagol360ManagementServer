@@ -17,9 +17,13 @@ export const getAllAppointments = (
   }
 };
 
-export const getNextAppointment = (req: Request, res: Response, _next: NextFunction) => {
+export const getNextAppointment = (
+  req: Request<never, never, never, { patientId: string; date: string }>,
+  res: Response,
+  _next: NextFunction,
+) => {
   try {
-    const { patientId, date } = req.query as { patientId: string; date: string };
+    const { patientId, date } = req.query;
     const result = appointmentService.getNextAppointment(patientId, date);
     res.status(StatusCodes.OK).json(result);
   } catch {

@@ -23,5 +23,5 @@ export const getNextAppointment = (patientId: string, date: string): Appointment
 
 export const appointmentService = {
   getNextAppointment,
-  getAppointments 
-} 
+  getAppointments,
+};
