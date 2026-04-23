@@ -20,3 +20,8 @@ export const getNextAppointment = (patientId: string, date: string): Appointment
     .filter((a) => a.patientId === patientId && a.date >= date)
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0];
 };
+
+export const appointmentService = {
+  getNextAppointment,
+  getAppointments 
+} 
