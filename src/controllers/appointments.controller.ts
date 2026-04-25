@@ -6,7 +6,6 @@ import { INTERNAL_SERVER_ERROR_MESSAGE } from '../constants/error.constants';
 export const getAllAppointments = (
   req: Request<never, never, never, { patientId: string }>,
   res: Response,
-  _next: NextFunction,
 ) => {
   try {
     const { patientId } = req.query;
@@ -20,7 +19,6 @@ export const getAllAppointments = (
 export const getNextAppointment = (
   req: Request<never, never, never, { patientId: string; date: string }>,
   res: Response,
-  _next: NextFunction,
 ) => {
   try {
     const { patientId, date } = req.query;
