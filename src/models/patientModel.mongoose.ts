@@ -15,7 +15,7 @@ const patientSchema = new Schema(
     preferredLanguage: String,
     appointments: [appointmentSchema],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export { patientSchema };

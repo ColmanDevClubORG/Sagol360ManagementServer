@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getPatientBySerializeNumber } from '../controllers/patient.controller';
+import { getPatientBySerializeNumber } from '../controllers/patient/patient.controller';
 
 const router = Router();
 

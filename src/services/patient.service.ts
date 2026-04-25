@@ -1,24 +1,25 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { PATIENT_ERROR_MESSAGES } from '../constants/patient/patient.constants';
 
 interface Appointment {
-  title?: string;
-  startAt?: string;
-  durationMinutes?: number;
-  location?: string;
-  type?: string;
+  title: string;
+  startAt: string;
+  durationMinutes: number;
+  location: string;
+  type: string;
 }
 
 interface Patient {
-  serializeNumber?: number;
-  firstName?: string;
-  secondName?: string;
-  lastName?: string;
-  gender?: string;
-  totalProtocolTreatments?: number;
-  currentTreatmentNumber?: number;
-  preferredLanguage?: string;
-  appointments?: Appointment[];
+  serializeNumber: number;
+  firstName: string;
+  secondName: string;
+  lastName: string;
+  gender: string;
+  totalProtocolTreatments: number;
+  currentTreatmentNumber: number;
+  preferredLanguage: string;
+  appointments: Appointment[];
 }
 
 interface PatientsDb {
@@ -43,13 +44,15 @@ const getAllPatients = async (): Promise<Patient[]> => {
 };
 
 export const getPatientBySerializeNumber = async (
-  serializeNumber: number
-): Promise<PatientResponse | null> => {
+  serializeNumber: number,
+): Promise<PatientResponse> => {
   const patients = await getAllPatients();
-  const patient = patients.find((currentPatient) => currentPatient.serializeNumber === serializeNumber);
+  const patient = patients.find(
+    (currentPatient) => currentPatient.serializeNumber === serializeNumber,
+  );
 
   if (!patient) {
-    return null;
+    throw new Error(PATIENT_ERROR_MESSAGES.PATIENT_NOT_FOUND);
   }
 
   const {
@@ -57,16 +60,17 @@ export const getPatientBySerializeNumber = async (
     firstName,
     totalProtocolTreatments,
     currentTreatmentNumber,
-    appointments = [],
+    appointments,
   } = patient;
 
   if (
     patientSerializeNumber === undefined ||
     firstName === undefined ||
     totalProtocolTreatments === undefined ||
-    currentTreatmentNumber === undefined
+    currentTreatmentNumber === undefined ||
+    appointments === undefined
   ) {
-    return null;
+    throw new Error(PATIENT_ERROR_MESSAGES.PATIENT_DATA_MISSING_REQUIRED_FIELDS);
   }
 
   return {
@@ -76,4 +80,8 @@ export const getPatientBySerializeNumber = async (
     currentTreatmentNumber,
     appointments,
   };
+};
+
+export const patientService = {
+  getPatientBySerializeNumber,
 };
