@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { appointmentService } from '../services/appointments.service';
 import { StatusCodes } from 'http-status-codes';
 import { INTERNAL_SERVER_ERROR_MESSAGE } from '../constants/error.constants';
