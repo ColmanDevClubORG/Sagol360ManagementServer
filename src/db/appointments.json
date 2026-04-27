@@ -1,0 +1,52 @@
+[
+  {
+    "appointmentId": "A-1001",
+    "patientId": "1622017",
+    "date": "2026-04-13",
+    "time": "09:30",
+    "chamber": "Red",
+    "chairNumber": 9,
+    "treatmentNumber": 2,
+    "status": "confirmed"
+  },
+  {
+    "appointmentId": "A-1002",
+    "patientId": "1622017",
+    "date": "2026-04-20",
+    "time": "11:00",
+    "chamber": "Blue",
+    "chairNumber": 3,
+    "treatmentNumber": 3,
+    "status": "confirmed"
+  },
+  {
+    "appointmentId": "A-1003",
+    "patientId": "1622017",
+    "date": "2026-05-05",
+    "time": "14:15",
+    "chamber": "Green",
+    "chairNumber": 7,
+    "treatmentNumber": 4,
+    "status": "pending"
+  },
+  {
+    "appointmentId": "A-1004",
+    "patientId": "9988776",
+    "date": "2026-04-14",
+    "time": "08:00",
+    "chamber": "Red",
+    "chairNumber": 1,
+    "treatmentNumber": 1,
+    "status": "confirmed"
+  },
+  {
+    "appointmentId": "A-1005",
+    "patientId": "9988776",
+    "date": "2026-04-28",
+    "time": "10:30",
+    "chamber": "Blue",
+    "chairNumber": 5,
+    "treatmentNumber": 2,
+    "status": "pending"
+  }
+]
