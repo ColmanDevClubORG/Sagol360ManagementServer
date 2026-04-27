@@ -6,7 +6,6 @@
     "time": "09:30",
     "chamber": "Red",
     "chairNumber": 9,
-    "treatmentNumber": 2,
     "status": "confirmed"
   },
   {
@@ -16,7 +15,6 @@
     "time": "11:00",
     "chamber": "Blue",
     "chairNumber": 3,
-    "treatmentNumber": 3,
     "status": "confirmed"
   },
   {
@@ -26,7 +24,6 @@
     "time": "14:15",
     "chamber": "Green",
     "chairNumber": 7,
-    "treatmentNumber": 4,
     "status": "pending"
   },
   {
@@ -36,7 +33,6 @@
     "time": "08:00",
     "chamber": "Red",
     "chairNumber": 1,
-    "treatmentNumber": 1,
     "status": "confirmed"
   },
   {
@@ -46,7 +42,6 @@
     "time": "10:30",
     "chamber": "Blue",
     "chairNumber": 5,
-    "treatmentNumber": 2,
     "status": "pending"
   }
 ]
