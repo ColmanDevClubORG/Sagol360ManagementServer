@@ -1,22 +1,23 @@
 import mongoose from 'mongoose';
-import { appointmentSchema } from './appointmentModel.mongoose';
+export interface Patient {
+  patientId: string;
+  firstName: string;
+  secondName: string;
+  lastName: string;
+  gender: string;
+  preferredLanguage: string;
+}
 
-const { Schema } = mongoose;
-
-const patientSchema = new Schema(
+const patientSchema = new mongoose.Schema(
   {
-    serializeNumber: Number,
-    firstName: String,
-    secondName: String,
-    lastName: String,
-    gender: String,
-    totalProtocolTreatments: Number,
-    currentTreatmentNumber: Number,
-    preferredLanguage: String,
-    appointments: [appointmentSchema],
+    patientId: { type: String, required: true },
+    firstName: { type: String, required: true },
+    secondName: { type: String },
+    lastName: { type: String, required: true },
+    gender: { type: String },
+    preferredLanguage: { type: String },
   },
   { timestamps: true },
 );
 
-export { patientSchema };
-export const patientModel = mongoose.model('patient', patientSchema);
+export const patientModel = mongoose.model<Patient>('patient', patientSchema);

@@ -1,22 +1,22 @@
 import { Router } from 'express';
-import { getPatientBySerializeNumber } from '../controllers/patient/patient.controller';
+import { getPatientByPatientId } from '../controllers/patient/patient.controller';
 
 const router = Router();
 
 /**
  * @swagger
- * /api/patients/{serializeNumber}:
+ * /api/patients/{patientId}:
  *   get:
- *     summary: Returns patient details by serializeNumber
- *     description: Returns patient data using the patient's serializeNumber identifier.
+ *     summary: Returns patient details by patientId
+ *     description: Returns patient data using the patient's patientId identifier.
  *     parameters:
  *       - in: path
- *         name: serializeNumber
+ *         name: patientId
  *         required: true
  *         schema:
  *           type: string
  *           pattern: '^\d+$'
- *         description: The patient's serializeNumber
+ *         description: The patient's patientId
  *     responses:
  *       200:
  *         description: Patient found
@@ -25,9 +25,9 @@ const router = Router();
  *             schema:
  *               type: object
  *               properties:
- *                 serializeNumber:
- *                   type: number
- *                   example: 1622017
+ *                 patientId:
+ *                   type: string
+ *                   example: "1622017"
  *                 firstName:
  *                   type: string
  *                   example: "שלמה"
@@ -38,12 +38,12 @@ const router = Router();
  *                   type: number
  *                   example: 30
  *               required:
- *                 - serializeNumber
+ *                 - patientId
  *                 - firstName
  *                 - totalProtocolTreatments
  *                 - currentTreatmentNumber
  *       400:
- *         description: Invalid serializeNumber format
+ *         description: Invalid patientId format
  *         content:
  *           application/json:
  *             schema:
@@ -51,7 +51,7 @@ const router = Router();
  *               properties:
  *                 message:
  *                   type: string
- *                   example: serializeNumber must contain only digits
+ *                   example: patientId must be a string containing only digits
  *       404:
  *         description: Patient not found
  *         content:
@@ -63,6 +63,6 @@ const router = Router();
  *                   type: string
  *                   example: Patient not found
  */
-router.get('/:serializeNumber', getPatientBySerializeNumber);
+router.get('/:patientId', getPatientByPatientId);
 
 export default router;
