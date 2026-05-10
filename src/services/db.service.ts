@@ -1,4 +1,4 @@
-import mongoose, { connect, connection, ConnectionStates, Model } from 'mongoose';
+import { connect, connection, ConnectionStates, Model } from 'mongoose';
 import { DEFAULT_MONGO_URI } from '../constants/db.constants';
 
 const MONGO_URI = process.env.MONGO_URI ?? DEFAULT_MONGO_URI;
