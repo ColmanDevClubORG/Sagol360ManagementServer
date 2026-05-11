@@ -5,9 +5,9 @@ export interface Tip {
   tip: string;
 }
 
-const tipSchema = new mongoose.Schema<Tip>({
+const tipSchema = new mongoose.Schema({
   treatmentNumber: { type: Number, required: true },
   tip: { type: String, required: true },
 });
 
-export const tipModel = mongoose.model<Tip>('tip', tipSchema);
+export const tipModel = mongoose.model('tip', tipSchema);
