@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { connectToDb, disconnectFromDb, seedDb } from './services/db.service';
 
 const seed = async () => {
