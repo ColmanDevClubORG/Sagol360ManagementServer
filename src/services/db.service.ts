@@ -1,5 +1,4 @@
 import { connect, connection, ConnectionStates, Model } from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import { DEFAULT_MONGO_URI } from '../constants/db.constants';
 import { appointmentModel } from '../models/appointmentModel.mongoose';
 import { patientModel } from '../models/patientModel.mongoose';
@@ -10,12 +9,7 @@ import tipsData from '../db/tips.json';
 
 const MONGO_URI = process.env.MONGO_URI ?? DEFAULT_MONGO_URI;
 
-let mongod: MongoMemoryServer | null = null;
-
 export const seedDb = async (): Promise<void> => {
-  await appointmentModel.deleteMany({});
-  await patientModel.deleteMany({});
-  await tipModel.deleteMany({});
   await appointmentModel.insertMany(appointmentsData);
   await patientModel.insertMany(patientsData);
   await tipModel.insertMany(tipsData);
@@ -27,23 +21,12 @@ export const connectToDb = async (): Promise<void> => {
     return;
   }
 
-  if (!process.env.MONGO_URI) {
-    mongod = await MongoMemoryServer.create();
-    await connect(mongod.getUri());
-    console.log('Local in-memory MongoDB started');
-    await seedDb();
-  } else {
-    await connect(MONGO_URI);
-    console.log('MongoDB connected');
-  }
+  await connect(MONGO_URI);
+  console.log('MongoDB connected');
 };
 
 export const disconnectFromDb = async (): Promise<void> => {
   await connection.close();
-  if (mongod) {
-    await mongod.stop();
-    mongod = null;
-  }
 };
 
 export const dbService = {

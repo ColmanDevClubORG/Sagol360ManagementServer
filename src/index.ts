@@ -12,10 +12,27 @@ const startServer = async (): Promise<void> => {
     console.log(`Swagger Documentation at http://localhost:${PORT}/api-docs`);
   });
 
+  const closeServer = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      server.close((error) => {
+        if (error){
+          reject(error)
+        }else{
+          resolve()
+        }
+      });
+    });
+  };
+
   const shutdown = async () => {
-    server.close();
-    await disconnectFromDb();
-    process.exit(0);
+    try {
+      await closeServer();
+      await disconnectFromDb();
+      process.exit(0);
+    } catch (error) {
+      console.error('Error during shutdown:', error);
+      process.exit(1);
+    }
   };
 
   process.on('SIGINT', shutdown);
