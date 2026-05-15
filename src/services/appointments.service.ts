@@ -5,7 +5,7 @@ import type { Appointment } from '../models/appointmentModel.mongoose';
 const appointments = rawAppointments as Appointment[];
 
 const getAppointmentsByPatientId = (patientId: string): Appointment[] => {
-    return appointments.filter((appointment) => appointment.patientId === patientId)
+  return appointments.filter((appointment) => appointment.patientId === patientId);
 };
 
 export const getNextAppointment = (patientId: string, date: string): Appointment | undefined => {

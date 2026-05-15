@@ -1,20 +1,18 @@
-{
-  "patients": [
-    {
-      "patientId": "1622017",
-      "firstName": "שלמה",
-      "secondName": "",
-      "lastName": "כהן",
-      "gender": "male",
-      "preferredLanguage": "he"
-    },
-    {
-      "patientId": "1622018",
-      "firstName": "דנה",
-      "secondName": "",
-      "lastName": "לוי",
-      "gender": "female",
-      "preferredLanguage": "he"
-    }
-  ]
-}
+[
+  {
+    "patientId": "1622017",
+    "firstName": "שלמה",
+    "secondName": "",
+    "lastName": "כהן",
+    "gender": "male",
+    "preferredLanguage": "he"
+  },
+  {
+    "patientId": "1622018",
+    "firstName": "דנה",
+    "secondName": "",
+    "lastName": "לוי",
+    "gender": "female",
+    "preferredLanguage": "he"
+  }
+]
