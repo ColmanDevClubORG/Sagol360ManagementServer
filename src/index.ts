@@ -15,10 +15,10 @@ const startServer = async (): Promise<void> => {
   const closeServer = (): Promise<void> => {
     return new Promise((resolve, reject) => {
       server.close((error) => {
-        if (error){
-          reject(error)
-        }else{
-          resolve()
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
         }
       });
     });
