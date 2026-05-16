@@ -13,11 +13,10 @@ interface PatientResponse {
 
 const getAllPatients = async (): Promise<Patient[]> => {
   const patients = await dbService.get(patientModel);
-  if (!patients){
+  if (!patients) {
     throw new Error(PATIENT_ERROR_MESSAGES.PATIENTS_NOT_FOUND);
   }
   return patients;
-  
 };
 
 const getPatientByPatientId = async (patientId: string): Promise<PatientResponse> => {
