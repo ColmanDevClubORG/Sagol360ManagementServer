@@ -1,9 +1,8 @@
-import { Router } from "express"
-import { SentToday, SubmitReport } from "@/controllers/metrics.controller"
+import { Router } from 'express';
+import { SentToday, SubmitReport } from '@/controllers/metrics.controller';
 
-const router = Router()
+const router = Router();
 
-
-router.get('/today/:patientId', SentToday)
-router.post('/:patientId', SubmitReport)
-export default router
+router.get('/today/:patientId', SentToday);
+router.post('/:patientId', SubmitReport);
+export default router;
