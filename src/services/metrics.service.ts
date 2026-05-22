@@ -8,7 +8,7 @@ const isSentToday = async (patientId: string) => {
     patientId,
     createdAt: { $gte: startOfDay },
   });
-  return alreadySubmitted ? true : false;
+  return Boolean(alreadySubmitted);
 };
 
 const SubmitReport = async (patientId: string, metrics: Omit<Metrics, 'patientId'>) => {
