@@ -1,6 +1,5 @@
-
 export const getStartOfDay = () => {
-    const date = new Date()
-    date.setHours(0, 0, 0, 0)
-    return date
-}
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+  return date;
+};

@@ -20,6 +20,6 @@ const SubmitReport = async (patientId: string, metrics: Omit<Metrics, 'patientId
 };
 
 export const metricsService = {
-    isSentToday,
-    SubmitReport
-}
+  isSentToday,
+  SubmitReport,
+};
