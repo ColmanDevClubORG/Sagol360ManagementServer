@@ -1,6 +1,7 @@
 [
   {
     "patientId": "1622017",
+    "password": "123456789",
     "firstName": "שלמה",
     "secondName": "",
     "lastName": "כהן",
@@ -9,6 +10,7 @@
   },
   {
     "patientId": "1622018",
+    "password": "987654321",
     "firstName": "דנה",
     "secondName": "",
     "lastName": "לוי",
