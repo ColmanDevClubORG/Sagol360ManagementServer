@@ -1,4 +1,4 @@
-import { QR_create, QR_verify } from '@/controllers/login/login.controller';
+import { createQR, verifyQR } from '@/controllers/login/login.controller';
 import { Router } from 'express';
 
 const router = Router();
@@ -10,7 +10,7 @@ const router = Router();
  *     summary: Create a mock QR login token
  *     tags:
  *       - Login
- *     description: Validates mock login credentials, encrypts them into a token, and returns the token for the frontend QR flow.
+ *     description: Validates mock login credentials, encodes them into a signed mock token, and returns the token for the frontend QR flow.
  *     requestBody:
  *       required: true
  *       content:
@@ -60,7 +60,7 @@ const router = Router();
  *                   type: string
  *                   example: Invalid userId or password
  */
-router.post('/QR/create', QR_create);
+router.post('/QR/create', createQR);
 
 /**
  * @swagger
@@ -69,7 +69,7 @@ router.post('/QR/create', QR_create);
  *     summary: Verify a mock QR login token
  *     tags:
  *       - Login
- *     description: Decrypts the QR token and checks that the credentials still match the mock login user.
+ *     description: Decodes the QR token and checks that the credentials still match the mock login user.
  *     requestBody:
  *       required: true
  *       content:
@@ -120,6 +120,6 @@ router.post('/QR/create', QR_create);
  *                   type: string
  *                   example: Invalid QR token
  */
-router.post('/QR/verify', QR_verify);
+router.post('/QR/verify', verifyQR);
 
 export default router;
