@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { metricsService } from '@/services/metrics.service';
+import { REPORT_ALREADY_SUBMITTED } from '@/constants/error.constants';
 import { StatusCodes } from 'http-status-codes';
 
 export const SentToday = async (
@@ -27,6 +28,10 @@ export const SubmitReport = async (
     const submitReport = await metricsService.SubmitReport(patientId, metrics);
     res.status(StatusCodes.CREATED).json(submitReport);
   } catch (error) {
+    if (error instanceof Error && error.message === REPORT_ALREADY_SUBMITTED) {
+      res.status(StatusCodes.CONFLICT).json({ message: error.message });
+      return;
+    }
     next(error);
   }
 };
