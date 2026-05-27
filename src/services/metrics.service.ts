@@ -1,6 +1,7 @@
 import { Metrics, metricsModel } from '@/models/metricsModel.mongoose';
 import { REPORT_ALREADY_SUBMITTED } from '@/constants/error.constants';
 import { getStartOfDay } from '@/utils/date';
+import {type MetricsPayload} from '../types/metrics.types'
 
 const isSentToday = async (patientId: string) => {
   const startOfDay = getStartOfDay();
@@ -11,7 +12,7 @@ const isSentToday = async (patientId: string) => {
   return Boolean(alreadySubmitted);
 };
 
-const SubmitReport = async (patientId: string, metrics: Omit<Metrics, 'patientId'>) => {
+const SubmitReport = async (patientId: string, metrics: MetricsPayload) => {
   const alreadySubmitted = await isSentToday(patientId);
   if (alreadySubmitted) {
     throw new Error(REPORT_ALREADY_SUBMITTED);
