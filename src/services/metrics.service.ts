@@ -1,7 +1,7 @@
-import { Metrics, metricsModel } from '@/models/metricsModel.mongoose';
+import { metricsModel } from '@/models/metricsModel.mongoose';
 import { REPORT_ALREADY_SUBMITTED } from '@/constants/error.constants';
 import { getStartOfDay } from '@/utils/date';
-import {type MetricsPayload} from '../types/metrics.types'
+import { type MetricsPayload } from '../types/metrics.types';
 
 const isSentToday = async (patientId: string) => {
   const startOfDay = getStartOfDay();
