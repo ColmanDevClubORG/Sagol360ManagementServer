@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 export interface Patient {
   patientId: string;
+  password: string;
   firstName: string;
   secondName: string;
   lastName: string;
@@ -11,6 +12,7 @@ export interface Patient {
 const patientSchema = new mongoose.Schema(
   {
     patientId: { type: String, required: true },
+    password: { type: String, required: true },
     firstName: { type: String, required: true },
     secondName: { type: String },
     lastName: { type: String, required: true },

@@ -33,7 +33,6 @@ export const dbService = {
   get: async <T>(model: Model<T>, filter: Record<string, unknown> = {}) => {
     return model.find(filter).lean<T[]>();
   },
-
   insert: async <T>(model: Model<T>, data: Partial<T>) => {
     return model.create(data);
   },
