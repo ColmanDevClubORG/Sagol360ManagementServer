@@ -9,6 +9,7 @@ import { errorHandler } from './middleware/error.middleware';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swagger';
 import metricsRoutes from './routes/metrics.routes';
+import emailRoutes from './routes/email.routes';
 
 const app: Application = express();
 
@@ -24,6 +25,7 @@ app.use('/api/login', loginRoutes);
 app.use('/api/appointment', appointmentRoutes);
 app.use('/api/tips', tipsRoutes);
 app.use('/api/metrics/', metricsRoutes);
+app.use('/api/email', emailRoutes);
 
 app.use(errorHandler);
 
