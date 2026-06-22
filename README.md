@@ -88,20 +88,16 @@ node dist/index.js
 
 ## Environment Variables
 
-The currently checked-in `src/index.ts` uses a fixed port:
-
-```ts
-const PORT = 3000;
-```
-
-That means the current server does not require a `.env` file to start.
-
-If future branches re-enable environment-based configuration, create a local `.env` file like this:
+The server uses environment variables for configuration. Create a local `.env` file based on
+`.env.example`:
 
 ```env
+CORS_ORIGIN=http://localhost:5173
 PORT=3000
 MONGO_URI=mongodb://127.0.0.1:27017/sagol360managementserver
 ```
+
+`CORS_ORIGIN` is required. In production, set it to the deployed frontend origin.
 
 Do not commit real secrets to Git.
 

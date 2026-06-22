@@ -10,8 +10,22 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swagger';
 import metricsRoutes from './routes/metrics.routes';
 import emailRoutes from './routes/email.routes';
+import cors from 'cors';
+import { CORS_ORIGIN_REQUIRED_ERROR } from './constants/error.constants';
+
+const corsOrigin = process.env.CORS_ORIGIN;
+
+if (!corsOrigin) {
+  throw new Error(CORS_ORIGIN_REQUIRED_ERROR);
+}
 
 const app: Application = express();
+app.use(
+  cors({
+    origin: corsOrigin,
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 app.use(logger);
