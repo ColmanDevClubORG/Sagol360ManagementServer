@@ -1,5 +1,6 @@
 import { findPatientByCredentials } from '@/services/login.service';
 import { createQrToken, verifyQrToken } from '@/services/qr-token.service';
+import { issueToken } from '@/auth/jwt';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { PATIENT_ERROR_MESSAGES } from '@/constants/patient/patient.constants';
@@ -61,8 +62,11 @@ export const verifyQR = (req: Request<never, never, QRVerifyBody>, res: Response
     });
   }
 
+  const sessionToken = issueToken(patient.patientId);
+
   return res.json({
     message: LOGIN_MESSAGES.QR_LOGIN_SUCCESS,
+    token: sessionToken,
     user: {
       userId: patient.patientId,
     },

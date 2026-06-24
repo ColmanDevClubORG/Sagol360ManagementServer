@@ -9,3 +9,7 @@ export const findPatientByCredentials = (userId: string, password: string): Pati
     null
   );
 };
+
+export const findPatientById = (userId: string): Patient | null => {
+  return patients.find((patient) => patient.patientId === userId) ?? null;
+};
