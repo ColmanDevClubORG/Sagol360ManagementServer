@@ -4,18 +4,27 @@ if (!process.env.JWT_SECRET) {
   throw new Error('JWT_SECRET is not set');
 }
 
+export type TokenType = 'session' | 'qr-signature';
+
 export interface JwtPayload {
   userId: string;
+  type: TokenType;
 }
 
 export const JWT_SECRET = process.env.JWT_SECRET;
 
 const TOKEN_TTL = '2h';
 
-export function issueToken(userId: string) {
-  return jwt.sign({ userId: userId }, JWT_SECRET, { expiresIn: TOKEN_TTL });
-}
+export const signToken = (userId: string, type: TokenType = 'session') => {
+  return jwt.sign({ userId: userId, type }, JWT_SECRET, { expiresIn: TOKEN_TTL });
+};
 
-export function verifyToken(token: string) {
-  return jwt.verify(token, JWT_SECRET) as JwtPayload;
-}
+export const verifyToken = (token: string, expectedType: TokenType = 'session') => {
+  const payload = jwt.verify(token, JWT_SECRET) as JwtPayload;
+
+  if (payload.type !== expectedType) {
+    throw new Error('Unexpected token type');
+  }
+
+  return payload;
+};

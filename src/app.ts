@@ -12,6 +12,7 @@ import metricsRoutes from './routes/metrics.routes';
 import emailRoutes from './routes/email.routes';
 import cors from 'cors';
 import { CORS_ORIGIN_REQUIRED_ERROR } from './constants/error.constants';
+import { authenticate } from './auth/authenticate';
 
 const corsOrigin = process.env.CORS_ORIGIN;
 
@@ -34,12 +35,15 @@ app.use(logger);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', exampleRoutes);
-app.use('/api/patients', patientRoutes);
 app.use('/api/login', loginRoutes);
-app.use('/api/appointment', appointmentRoutes);
 app.use('/api/tips', tipsRoutes);
-app.use('/api/metrics/', metricsRoutes);
 app.use('/api/email', emailRoutes);
+
+app.use(authenticate);
+
+app.use('/api/patients', patientRoutes);
+app.use('/api/appointment', appointmentRoutes);
+app.use('/api/metrics/', metricsRoutes);
 
 app.use(errorHandler);
 

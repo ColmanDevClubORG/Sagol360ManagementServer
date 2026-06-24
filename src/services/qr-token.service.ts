@@ -1,4 +1,4 @@
-import { issueToken, verifyToken } from '@/auth/jwt';
+import { signToken, verifyToken } from '@/auth/jwt';
 const TOKEN_PREFIX = 'mock';
 
 export interface QrTokenPayload {
@@ -17,7 +17,7 @@ const isQrTokenPayload = (payload: unknown): payload is QrTokenPayload => {
 };
 
 const signPayload = (encodedPayload: string): string => {
-  return issueToken(encodedPayload);
+  return signToken(encodedPayload, 'qr-signature');
 };
 
 const parsePayload = (encodedPayload: string): QrTokenPayload | null => {
@@ -45,14 +45,15 @@ export const verifyQrToken = (token: string): QrTokenPayload | null => {
       return null;
     }
 
-    const hasValidSignature = verifyToken(signature).userId === encodedPayload;
+    const hasValidSignature = verifyToken(signature, 'qr-signature').userId === encodedPayload;
 
     if (!hasValidSignature) {
       return null;
     }
 
     return parsePayload(encodedPayload);
-  } catch {
+  } catch (error) {
+    console.error('Failed to verify QR token:', error);
     return null;
   }
 };

@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import { SentToday, SubmitReport } from '@/controllers/metrics.controller';
-import { authenticate } from '@/auth/authenticate';
 
 const router = Router();
-
-router.use(authenticate);
 
 /**
  * @swagger

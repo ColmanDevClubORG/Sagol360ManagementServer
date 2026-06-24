@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import { getAllAppointments, getNextAppointment } from '@/controllers/appointments.controller';
-import { authenticate } from '@/auth/authenticate';
 
 const router = Router();
-
-router.use(authenticate);
 
 /**
  * @swagger

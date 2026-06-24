@@ -1,10 +1,7 @@
 import { Router } from 'express';
 import { getPatientByPatientId } from '../controllers/patient/patient.controller';
-import { authenticate } from '@/auth/authenticate';
 
 const router = Router();
-
-router.use(authenticate);
 
 /**
  * @swagger
