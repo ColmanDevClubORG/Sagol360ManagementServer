@@ -1,21 +1,10 @@
 import { issueToken, verifyToken } from '@/auth/jwt';
 const TOKEN_PREFIX = 'mock';
-const SIGNATURE_LENGTH = 16;
 
 export interface QrTokenPayload {
   userId: string;
   password: string;
 }
-
-const getKey = (): string => {
-  const secret = process.env.QR_SECRET;
-
-  if (!secret) {
-    throw new Error('QR_SECRET environment variable is required');
-  }
-
-  return secret;
-};
 
 const isQrTokenPayload = (payload: unknown): payload is QrTokenPayload => {
   if (!payload || typeof payload !== 'object') {
@@ -28,7 +17,7 @@ const isQrTokenPayload = (payload: unknown): payload is QrTokenPayload => {
 };
 
 const signPayload = (encodedPayload: string): string => {
-  return issueToken(encodedPayload)
+  return issueToken(encodedPayload);
 };
 
 const parsePayload = (encodedPayload: string): QrTokenPayload | null => {
