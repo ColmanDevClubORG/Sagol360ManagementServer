@@ -63,6 +63,6 @@ const router = Router();
  *                   type: string
  *                   example: Patient not found
  */
-router.get('/:patientId', getPatientByPatientId);
+router.get('/:patientId?', getPatientByPatientId);
 
 export default router;
