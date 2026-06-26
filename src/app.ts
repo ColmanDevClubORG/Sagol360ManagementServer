@@ -36,11 +36,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', exampleRoutes);
 app.use('/api/login', loginRoutes);
-app.use('/api/tips', tipsRoutes);
-app.use('/api/email', emailRoutes);
 
 app.use(authenticate);
 
+app.use('/api/tips', tipsRoutes);
+app.use('/api/email', emailRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/appointment', appointmentRoutes);
 app.use('/api/metrics/', metricsRoutes);

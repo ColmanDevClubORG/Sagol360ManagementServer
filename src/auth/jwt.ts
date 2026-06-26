@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 
 if (!process.env.JWT_SECRET) {
   throw new Error('JWT_SECRET is not set');
@@ -13,7 +13,7 @@ export interface JwtPayload {
 
 export const JWT_SECRET = process.env.JWT_SECRET;
 
-const TOKEN_TTL = '2h';
+const TOKEN_TTL = process.env.JWT_TOKEN_TTL as SignOptions['expiresIn'];
 
 export const signToken = (userId: string, type: TokenType = 'session') => {
   return jwt.sign({ userId: userId, type }, JWT_SECRET, { expiresIn: TOKEN_TTL });
