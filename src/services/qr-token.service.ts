@@ -1,22 +1,10 @@
-import { createHash } from 'node:crypto';
-
+import { signToken, verifyToken } from '@/auth/jwt';
 const TOKEN_PREFIX = 'mock';
-const SIGNATURE_LENGTH = 16;
 
 export interface QrTokenPayload {
   userId: string;
   password: string;
 }
-
-const getKey = (): string => {
-  const secret = process.env.QR_SECRET;
-
-  if (!secret) {
-    throw new Error('QR_SECRET environment variable is required');
-  }
-
-  return secret;
-};
 
 const isQrTokenPayload = (payload: unknown): payload is QrTokenPayload => {
   if (!payload || typeof payload !== 'object') {
@@ -29,10 +17,7 @@ const isQrTokenPayload = (payload: unknown): payload is QrTokenPayload => {
 };
 
 const signPayload = (encodedPayload: string): string => {
-  return createHash('sha256')
-    .update(`${encodedPayload}.${getKey()}`)
-    .digest('base64url')
-    .slice(0, SIGNATURE_LENGTH);
+  return signToken(encodedPayload, 'qr-signature');
 };
 
 const parsePayload = (encodedPayload: string): QrTokenPayload | null => {
@@ -47,23 +32,28 @@ export const createQrToken = (userId: string, password: string): string => {
   );
   const signature = signPayload(encodedPayload);
 
-  return [TOKEN_PREFIX, encodedPayload, signature].join('.');
+  return [TOKEN_PREFIX, encodedPayload, signature].join(':');
 };
 
 export const verifyQrToken = (token: string): QrTokenPayload | null => {
   try {
-    const [prefix, encodedPayload, signature, extraPart] = token.split('.');
+    const [prefix, encodedPayload, signature, extraPart] = token.split(':');
     const hasExtraPart = extraPart !== undefined;
     const hasRequiredParts =
       prefix === TOKEN_PREFIX && Boolean(encodedPayload) && Boolean(signature) && !hasExtraPart;
-    const hasValidSignature = hasRequiredParts && signPayload(encodedPayload) === signature;
+    if (!hasRequiredParts) {
+      return null;
+    }
 
-    if (!hasRequiredParts || !hasValidSignature) {
+    const hasValidSignature = verifyToken(signature, 'qr-signature').userId === encodedPayload;
+
+    if (!hasValidSignature) {
       return null;
     }
 
     return parsePayload(encodedPayload);
-  } catch {
+  } catch (error) {
+    console.error('Failed to verify QR token:', error);
     return null;
   }
 };

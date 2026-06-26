@@ -20,8 +20,7 @@ export const EMAIL_TEXT = {
   treatmentTime: 'בשעה',
   cell: 'תא',
   building: 'בניין',
-  rescheduleMessage:
-    'אנא פנה למטופל לקביעת מועד חדש ועדכן במערכת כי התפנה כיסא.',
+  rescheduleMessage: 'אנא פנה למטופל לקביעת מועד חדש ועדכן במערכת כי התפנה כיסא.',
   automaticMessage: 'הודעה זו נשלחה אוטומטית ממערכת Sagol360.',
   patientNameLabel: 'שם מטופל',
   patientNumberLabel: 'מספר מטופל',
